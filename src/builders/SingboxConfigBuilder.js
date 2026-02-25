@@ -1,4 +1,4 @@
-
+﻿
 import { SING_BOX_CONFIG, generateRuleSets, generateRules, getOutbounds, PREDEFINED_RULE_SETS, DIRECT_DEFAULT_RULES } from '../config/index.js';
 import { BaseConfigBuilder } from './BaseConfigBuilder.js';
 import { deepCopy, groupProxiesByCountry } from '../utils.js';
@@ -428,6 +428,14 @@ export class SingboxConfigBuilder extends BaseConfigBuilder {
 
         // Validate outbounds: fill empty urltest groups with all proxies
         this.validateOutbounds();
+
+        rules.filter(rule => Array.isArray(rule.src_ip_cidr) && rule.src_ip_cidr.length > 0).map(rule => {
+            this.config.route.rules.push({
+                source_ip_cidr: rule.src_ip_cidr,
+                protocol: rule.protocol,
+                outbound: this.t(`outboundNames.${rule.outbound}`)
+            });
+        });
 
         rules.filter(rule => !!rule.domain_suffix || !!rule.domain_keyword).map(rule => {
             this.config.route.rules.push({

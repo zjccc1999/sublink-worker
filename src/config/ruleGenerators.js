@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Rule Generators
  * Functions for generating rules and rule sets
  */
@@ -48,6 +48,7 @@ export function generateRules(selectedRules = [], customRules = []) {
 			domain_suffix: rule.domain_suffix ? rule.domain_suffix.split(',') : [],
 			domain_keyword: rule.domain_keyword ? rule.domain_keyword.split(',') : [],
 			ip_cidr: rule.ip_cidr ? rule.ip_cidr.split(',') : [],
+			src_ip_cidr: rule.src_ip_cidr ? rule.src_ip_cidr.split(',').map(x => x.trim()).filter(Boolean) : [],
 			protocol: rule.protocol ? rule.protocol.split(',') : [],
 			outbound: rule.name
 		});

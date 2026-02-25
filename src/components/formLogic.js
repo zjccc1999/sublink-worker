@@ -1,4 +1,4 @@
-import { parseSurgeConfigInput } from '../utils/surgeConfigParser.js';
+﻿import { parseSurgeConfigInput } from '../utils/surgeConfigParser.js';
 
 export const formLogicFn = (t) => {
     window.formData = function () {
@@ -136,6 +136,15 @@ export const formLogicFn = (t) => {
                 } else if (this.selectedPredefinedRule === 'custom') {
                     params.append('selectedRules', JSON.stringify(this.selectedRules));
                 }
+
+                // Include customRules when available (best-effort; may make URL long)
+                try {
+                    const customRulesInput = document.querySelector('input[name="customRules"]');
+                    const customRules = customRulesInput && customRulesInput.value ? JSON.parse(customRulesInput.value) : [];
+                    if (Array.isArray(customRules) && customRules.length > 0) {
+                        params.append('customRules', JSON.stringify(customRules));
+                    }
+                } catch { }
 
                 if (!this.includeAutoSelect) {
                     params.append('include_auto_select', 'false');
