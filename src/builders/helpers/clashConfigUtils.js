@@ -40,7 +40,7 @@
         .filter(rule => Array.isArray(rule.ip_rules) && rule.ip_rules[0])
         .forEach(rule => {
             rule.ip_rules.forEach(ip => {
-                results.push(`RULE-SET,${ip},${translator('outboundNames.' + rule.outbound)},no-resolve`);
+                results.push(`RULE-SET,${ip}-ip,${translator('outboundNames.' + rule.outbound)},no-resolve`);
             });
         });
 

@@ -182,12 +182,12 @@ export function generateClashRuleSets(selectedRules = [], customRules = [], useM
 	});
 
 	Array.from(ipRuleSets).forEach(rule => {
-		ip_rule_providers[rule] = {
+		ip_rule_providers[`${rule}-ip`] = {
 			type: 'http',
 			format: format,
 			behavior: 'ipcidr',
 			url: `${CLASH_IP_RULE_SET_BASE_URL}${rule}${ext}`,
-			path: `./ruleset/${rule}${ext}`,
+			path: `./ruleset/${rule}-ip${ext}`,
 			interval: 86400
 		};
 	});
@@ -218,12 +218,12 @@ export function generateClashRuleSets(selectedRules = [], customRules = [], useM
 				};
 			});
 			toStringArray(rule.ip).forEach(ip => {
-				ip_rule_providers[ip] = {
+				ip_rule_providers[`${ip}-ip`] = {
 					type: 'http',
 					format: format,
 					behavior: 'ipcidr',
 					url: `${CLASH_IP_RULE_SET_BASE_URL}${ip}${ext}`,
-					path: `./ruleset/${ip}${ext}`,
+					path: `./ruleset/${ip}-ip${ext}`,
 					interval: 86400
 				};
 			});
