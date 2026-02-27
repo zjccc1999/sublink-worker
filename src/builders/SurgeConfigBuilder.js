@@ -420,11 +420,16 @@ export class SurgeConfigBuilder extends BaseConfigBuilder {
                 const value = typeof cidr === 'string' ? cidr.trim() : cidr;
                 if (!value) return;
 
+                const safeValue = typeof value === 'string' ? value.replace(/[\r\n]+/g, '').trim() : value;
+                if (!safeValue) return;
+
                 // Surge supports SRC-IP (single IP). Best-effort: downgrade /32 CIDR to SRC-IP.
-                if (typeof value === 'string' && value.endsWith('/32')) {
-                    finalConfig.push(`SRC-IP,${value.slice(0, -3)},${this.t('outboundNames.' + rule.outbound)}`);
-                } else if (typeof value === 'string' && !value.includes('/')) {
-                    finalConfig.push(`SRC-IP,${value},${this.t('outboundNames.' + rule.outbound)}`);
+                if (typeof safeValue === 'string' && safeValue.endsWith('/32')) {
+                    finalConfig.push(`SRC-IP,${safeValue.slice(0, -3)},${this.t('outboundNames.' + rule.outbound)}`);
+                } else if (typeof safeValue === 'string' && !safeValue.includes('/')) {
+                    finalConfig.push(`SRC-IP,${safeValue},${this.t('outboundNames.' + rule.outbound)}`);
+                } else if (typeof safeValue === 'string' && safeValue.includes('/')) {
+                    finalConfig.push(`# SRC-IP-CIDR not supported by Surge, skipped: ${safeValue}`);
                 }
             });
         });
