@@ -1,4 +1,4 @@
-﻿/** @jsxRuntime automatic */
+/** @jsxRuntime automatic */
 /** @jsxImportSource hono/jsx */
 
 import { ValidatedTextarea } from './ValidatedTextarea.jsx';

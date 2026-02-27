@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Rule Generators
  * Functions for generating rules and rule sets
  */
@@ -9,7 +9,7 @@ import { SITE_RULE_SET_BASE_URL, IP_RULE_SET_BASE_URL, CLASH_SITE_RULE_SET_BASE_
 function toStringArray(value) {
 	if (Array.isArray(value)) {
 		return value
-			.map(x => (typeof x === 'string' ? x.trim() : String(x).trim()))
+			.filter(x => typeof x === 'string').map(x => x.trim())
 			.filter(Boolean);
 	}
 	if (typeof value === 'string') {

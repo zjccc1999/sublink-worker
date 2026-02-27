@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Subconverter Configuration Generator
  * Generates subconverter external config file (INI format) from unified rules
  */

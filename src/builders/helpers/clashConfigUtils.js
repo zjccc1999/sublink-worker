@@ -1,4 +1,4 @@
-﻿export function emitClashRules(rules = [], translator) {
+export function emitClashRules(rules = [], translator) {
     if (!translator) {
         throw new Error('emitClashRules requires a translator function');
     }

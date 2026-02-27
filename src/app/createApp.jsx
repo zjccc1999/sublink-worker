@@ -1,4 +1,4 @@
-﻿/** @jsxRuntime automatic */
+/** @jsxRuntime automatic */
 /** @jsxImportSource hono/jsx */
 import { Hono } from 'hono';
 import { Layout } from '../components/Layout.jsx';

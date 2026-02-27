@@ -1,4 +1,4 @@
-﻿import { APP_NAME } from '../constants.js';
+import { APP_NAME } from '../constants.js';
 import { checkStartsWith } from "../utils.js";
 
 // 定义语言包

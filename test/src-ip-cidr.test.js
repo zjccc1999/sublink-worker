@@ -1,4 +1,4 @@
-﻿import { describe, it, expect } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { generateRules } from '../src/config/ruleGenerators.js';
 import { emitClashRules } from '../src/builders/helpers/clashConfigUtils.js';
 import { createTranslator } from '../src/i18n/index.js';

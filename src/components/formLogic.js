@@ -1,4 +1,4 @@
-﻿import { parseSurgeConfigInput } from '../utils/surgeConfigParser.js';
+import { parseSurgeConfigInput } from '../utils/surgeConfigParser.js';
 
 export const formLogicFn = (t) => {
     window.formData = function () {
