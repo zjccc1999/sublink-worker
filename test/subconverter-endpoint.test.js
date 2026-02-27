@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+﻿import { describe, it, expect } from 'vitest';
 import { createApp } from '../src/app/createApp.jsx';
 import { MemoryKVAdapter } from '../src/adapters/kv/memoryKv.js';
 import { PREDEFINED_RULE_SETS } from '../src/config/index.js';
@@ -91,6 +91,17 @@ describe('GET /subconverter', () => {
         // Should NOT contain rules not selected
         expect(text).not.toContain('GEOSITE,youtube');
         expect(text).not.toContain('GEOSITE,bilibili');
+    });
+
+    it('accepts customRules and emits SRC-IP-CIDR rules', async () => {
+        const app = createTestApp();
+        const customRules = JSON.stringify([
+            { name: 'LAN', src_ip_cidr: '192.168.1.13/32' }
+        ]);
+        const res = await app.request(`http://localhost/subconverter?selectedRules=minimal&customRules=${encodeURIComponent(customRules)}`);
+        const text = await res.text();
+
+        expect(text).toContain('ruleset=LAN,[]SRC-IP-CIDR,192.168.1.13/32');
     });
 
     it('generates correct proxy group structure', async () => {
